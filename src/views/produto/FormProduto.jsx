@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import InputMask from 'react-input-mask';
-import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Icon,Segment,Modal,Header } from 'semantic-ui-react';
 import { ENDERECO_API } from '../../views/util/Constantes';
 
 export default function FormProduto () {
@@ -29,7 +29,7 @@ export default function FormProduto () {
 				setTitulo(response.data.titulo)
 				setDescricao(response.data.descricao)
 				setValorUnitario(response.data.valorUnitario)
-				setdataDeVencimento(response.data.dataDeVencimento)
+				setdataDeVencimento(formatarData(response.data.dataDeVencimento))
 				
 			})
 		}
@@ -61,6 +61,22 @@ export default function FormProduto () {
 		}
 	}
 
+	function formatarData(dataParam) {
+
+        if (dataParam == null || dataParam == '') {
+            return ''
+        }
+        
+        let dia = dataParam.substr(8,2);
+        let mes = dataParam.substr(5,2);
+        let ano = dataParam.substr(0,4);
+        let dataFormatada = dia + '/' + mes + '/' + ano;
+
+        return dataFormatada
+    }
+
+	const [open, setOpen] = React.useState(false)
+
 	return(
 		<div>
 
@@ -78,7 +94,7 @@ export default function FormProduto () {
 					<Divider />
 
 					<div style={{marginTop: '4%'}}>
-
+					<Segment color='green' >
 						<Form>
 
 							<Form.Group>
@@ -130,6 +146,7 @@ export default function FormProduto () {
 								/>
 								
 								<Form.Input
+									type="date"
 									fluid
 									label='Data de Vecimento'
 									width={6}
@@ -148,35 +165,58 @@ export default function FormProduto () {
 
 							<Form.Group widths='equal' style={{marginTop: '4%', justifyContent:'space-between'}}>
 
+							<Button.Group>
 								<Button
+									animated='vertical'						
 									type="button"
 									inverted
 									circular
 									icon
 									labelPosition='left'
-									color='orange'
+									color='red'
 								>
 									<Icon name='reply' />
-                                    <Link to={'/'}>Voltar</Link>
-									
-								</Button>
-
-								<Button
-									inverted
-									circular
-									icon
-									labelPosition='left'
-									primary
-									floated='right'
-									onClick={() => salvar()}
-									tabIndex='8'>
-									<Icon name='save' />
-									Salvar
-								</Button>
+									<Link to={'/'}>Voltar</Link>
+								</Button>		
+								<Button.Or />
+	  <Modal
+      closeIcon
+      open={open}
+      trigger={<Button
+	  onClick={() => salvar()}
+	  color='green'
+	  >
+		<Icon name='save' />
+		Salvar</Button>}
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+    >
+      <Header icon='box' content=' Produto registrado com sucesso!' />
+      <Modal.Content>
+        <b><p>
+		Você pode ver os produtos cadastrados ou voltar para a página inicial.
+        </p></b>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button color='blue' inverted onClick={() => setOpen(false)}
+		 as={Link}
+		 to='/'>
+          <Icon name='home' />Página Inicial
+        </Button>
+        <Button color='green' inverted onClick={() => setOpen(false)}
+		 as={Link}
+		 to='/list-produto'
+		>
+          <Icon name='box' />Produtos cadastrados
+        </Button>
+      </Modal.Actions>
+    </Modal>
+							</Button.Group>
 
 							</Form.Group>
 
 						</Form>
+						</Segment>
 					</div>
 				</Container>
 			</div>

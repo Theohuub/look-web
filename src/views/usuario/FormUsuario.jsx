@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
 import { Link, useLocation } from "react-router-dom";
-import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Icon, Segment,Header,Modal } from 'semantic-ui-react';
 import { ENDERECO_API } from '../../views/util/Constantes';
 
 export default function FormUsuario () {
@@ -77,6 +77,8 @@ export default function FormUsuario () {
 
         return dataFormatada
     }
+
+	const [open, setOpen] = React.useState(false)
 	
 	return(
 		<div>
@@ -95,7 +97,7 @@ export default function FormUsuario () {
 					<Divider />
 
 					<div style={{marginTop: '4%'}}>
-
+					<Segment color='green' >
 						<Form>
 
 							<Form.Group widths='equal'>
@@ -124,17 +126,19 @@ export default function FormUsuario () {
 									fluid
 									label='Data Nascimento'
 									width={6}
+									
 								>
 									<InputMask 
 										mask="99/99/9999" 
 										maskChar={null}
-										placeholder="Ex: 20/03/1985"
+										placeholder="Ex: 20/10/2023"
 										value={dataNascimento}
 										onChange={e => setDataNascimento(e.target.value)}
 									/> 
 								</Form.Input>
 
                                 <Form.Input
+									type="email"
 									required
 									fluid
 									label='Email'
@@ -173,6 +177,7 @@ export default function FormUsuario () {
 
                                 
                                 <Form.Input
+									type="password"
 									required
 									fluid
 									label='Senha'
@@ -188,38 +193,63 @@ export default function FormUsuario () {
 
 							<Form.Group widths='equal' style={{marginTop: '4%'}}  className='form--empresa-salvar'>
 
+							<Button.Group>
 								<Button
+									animated='vertical'						
 									type="button"
 									inverted
 									circular
 									icon
 									labelPosition='left'
-									color='orange'
+									color='red'
 								>
 									<Icon name='reply' />
-									<Link to={'/'}>Voltar</Link>
-								</Button>
-
+									<Link to={'/cadastro'}>Voltar</Link>
+								</Button>		
+								<Button.Or />
+								<Modal
+      closeIcon
+      open={open}
+      trigger={<Button
+	  onClick={() => salvar()}
+	  color='green'
+	  >
+		<Icon name='save' />
+		Salvar</Button>}
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+    >
+      <Header icon='add user' content=' Usuário cadastrado com sucesso!' />
+      <Modal.Content>
+        <b><p>
+		Você pode registrar sua loja ou voltar para página inicial.
+        </p></b>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button color='blue' inverted onClick={() => setOpen(false)}
+		 as={Link}
+		 to='/'>
+          <Icon name='home' />Página Inicial
+        </Button>
+        <Button color='green' inverted onClick={() => setOpen(false)}
+		 as={Link}
+		 to='/form-loja'
+		>
+          <Icon name='shopping basket' />Registrar Loja
+        </Button>
+      </Modal.Actions>
+    </Modal>
+							</Button.Group>
 								<Container textAlign='right'>
 									
-									<Button
-										inverted
-										circular
-										icon
-										labelPosition='left'
-										color='blue'
-										floated='right'
-										onClick={() => salvar()}
-									>
-										<Icon name='save' />
-										Salvar
-									</Button>
+									
 									
 								</Container>
 
 							</Form.Group>
 
 						</Form>
+					</Segment>	
 					</div>
 				</Container>
 			</div>

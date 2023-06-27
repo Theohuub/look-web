@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import InputMask from 'react-input-mask';
-import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Icon, Segment,Modal,Header} from 'semantic-ui-react';
 import { ENDERECO_API } from '../../views/util/Constantes';
 
 export default function FormLoja () {
@@ -68,15 +68,17 @@ export default function FormLoja () {
 		}
 	}
 
+	const [open, setOpen] = React.useState(false)
+
 	return(
 		<div>
-
+			
 			<div style={{marginTop: '3%'}}>
-
+				
 				<Container textAlign='justified' >
 
 					{ idLoja === undefined &&
-						<h2> <span style={{color: 'darkgray'}}> Loja &nbsp;<Icon name='angle double right' size="small" />Cadastro</span> </h2>
+						<h2> <span style={{color: 'darkgray'}}> Cadastro &nbsp;<Icon name='angle double right' size="small" />Loja</span> </h2>
 					}
 					{ idLoja != undefined &&
 						<h2> <span style={{color: 'darkgray'}}> Loja &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
@@ -85,7 +87,7 @@ export default function FormLoja () {
 					<Divider />
 
 					<div style={{marginTop: '4%'}}>
-
+					<Segment color='green' >
 						<Form>
 
 							<Form.Group>
@@ -179,37 +181,64 @@ export default function FormLoja () {
 
 							<Form.Group widths='equal' style={{marginTop: '4%', justifyContent:'space-between'}}>
 
+							<Button.Group>
 								<Button
+									animated='vertical'						
 									type="button"
 									inverted
 									circular
 									icon
 									labelPosition='left'
-									color='orange'
+									color='red'
 								>
 									<Icon name='reply' />
-                                    <Link to={'/'}>Voltar</Link>
-									
-								</Button>
-
-								<Button
-									inverted
-									circular
-									icon
-									labelPosition='left'
-									primary
-									floated='right'
-									onClick={() => salvar()}
-									tabIndex='8'>
-									<Icon name='save' />
-									Salvar
-								</Button>
-
+									<Link to={'/'}>Voltar</Link>
+								</Button>		
+								<Button.Or />
+								
+      <Modal
+      closeIcon
+      open={open}
+      trigger={<Button
+	  onClick={() => salvar()}
+	  color='green'
+	  >
+		<Icon name='save' />
+		Salvar</Button>}
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+    >
+      <Header icon='shopping basket' content=' Loja registrada com sucesso!' />
+      <Modal.Content>
+        <b><p>
+		Você pode adicionar um produto ou voltar para a página inicial.
+        </p></b>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button color='blue' inverted onClick={() => setOpen(false)}
+		 as={Link}
+		 to='/'>
+          <Icon name='home' />Página Inicial
+        </Button>
+        <Button color='green' inverted onClick={() => setOpen(false)}
+		 as={Link}
+		 to='/form-produto'
+		>
+          <Icon name='box' />Adicionar Produto
+        </Button>
+      </Modal.Actions>
+    </Modal>
+  
+							</Button.Group>
+					
 							</Form.Group>
-
 						</Form>
+						</Segment>
 					</div>
+					
 				</Container>
+				
+				
 			</div>
 		</div>
 	)
