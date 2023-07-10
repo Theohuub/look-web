@@ -179,38 +179,38 @@ export default function FormProduto () {
 									<Link to={'/'}>Voltar</Link>
 								</Button>		
 								<Button.Or />
-	  <Modal
-      closeIcon
-      open={open}
-      trigger={<Button
-	  onClick={() => salvar()}
-	  color='green'
-	  >
-		<Icon name='save' />
-		Salvar</Button>}
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
-    >
-      <Header icon='box' content=' Produto registrado com sucesso!' />
-      <Modal.Content>
-        <b><p>
-		Você pode ver os produtos cadastrados ou voltar para a página inicial.
-        </p></b>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button color='blue' inverted onClick={() => setOpen(false)}
-		 as={Link}
-		 to='/'>
-          <Icon name='home' />Página Inicial
-        </Button>
-        <Button color='green' inverted onClick={() => setOpen(false)}
-		 as={Link}
-		 to='/list-produto'
-		>
-          <Icon name='box' />Produtos cadastrados
-        </Button>
-      </Modal.Actions>
-    </Modal>
+									<Modal
+									closeIcon
+									open={open}
+									trigger={<Button
+									onClick={() => salvar()}
+									color='green'
+									>
+										<Icon name='save' />
+										Salvar</Button>}
+									onClose={() => setOpen(false)}
+									onOpen={() => setOpen(true)}
+									>
+									<Header icon='box' content=' Produto registrado com sucesso!' />
+									<Modal.Content>
+										<b><p>
+										Você pode ver os produtos cadastrados ou voltar para a página inicial.
+										</p></b>
+									</Modal.Content>
+									<Modal.Actions>
+										<Button color='blue' inverted onClick={() => setOpen(false)}
+										as={Link}
+										to='/'>
+										<Icon name='home' />Página Inicial
+										</Button>
+										<Button color='green' inverted onClick={() => setOpen(false)}
+										as={Link}
+										to='/list-produto'
+										>
+										<Icon name='box' />Produtos cadastrados
+										</Button>
+									</Modal.Actions>
+									</Modal>
 							</Button.Group>
 
 							</Form.Group>

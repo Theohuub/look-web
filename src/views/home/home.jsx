@@ -1,18 +1,9 @@
 import React from "react";
-import {  Button,
-  Container,
-  Divider,
-  Search,
+import {
+  Card,
   Grid,
-  Header,
-  Icon,
-  Image,
-  List,
-  Menu,
-  Segment,
-  Sidebar,
-  Advertisement,Input,Dropdown,Card} from 'semantic-ui-react';
-  import { Link, useLocation } from "react-router-dom";
+  Image
+} from 'semantic-ui-react';
 
 
 class Home extends React.Component{
@@ -21,20 +12,20 @@ class Home extends React.Component{
         return(        
             <div>
         <div>
-        <Grid>
-    <Grid.Row>
-    <Grid.Column width={2}>
-  
-      </Grid.Column>
-      <Grid.Column width={6}>
-        <Image src='/hoome.png' />
-      </Grid.Column>
-      <Grid.Column width={6}>
-        <Image src='/mulherHome.jpg' circular />
-      </Grid.Column>
-    </Grid.Row>
-    
-    </Grid>
+     '       <Grid >
+        <Grid.Row>
+        <Grid.Column width={2}>
+      
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <Image src='/hoome.png' />
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <Image src='/mulherHome.jpg' circular />
+          </Grid.Column>
+        </Grid.Row>
+        
+        </Grid>'
         </div>
       <br />
       <br />

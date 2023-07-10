@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Button, Dropdown, Menu,Input, Icon,Grid,Segment,Image,Divider,Card} from 'semantic-ui-react'
+import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { Dropdown, Input, Menu } from 'semantic-ui-react';
 
 export default class MenuExampleStackable extends Component {
   state = {}
@@ -31,28 +31,34 @@ export default class MenuExampleStackable extends Component {
           as={Link}
           to='/list-produto'
         />
+        
       </Menu>
        
-        <div>
-        <Menu stackable size='huge' color='green' inverted >
-        <Menu.Item position='right' >
-          <img alt="logo" src='/iconeApp.png'       
-          /> OOK!
-        </Menu.Item>
+        <div >
+          
+        <Menu position='right' 
+        stackable size='huge' 
+        color='green' inverted 
+        >
+          <Menu.Menu >
+          <Menu.Item position='right' >
+            <img alt="logo" src='/iconeApp.png'       
+            /> OOK!
+          </Menu.Item>
 
-        <Menu.Item icon='home'
-          name='Página Inicial'
-          active={activeItem === 'editarProduto'}
-          onClick={this.handleItemClick}
-          as={Link}
-          to='/'
+          <Menu.Item icon='home'
+            name='Página Inicial'
+            active={activeItem === 'editarProduto'}
+            onClick={this.handleItemClick}
+            as={Link}
+            to='/'
 
-        />
+          />
 
-        <Menu.Item>
-        <Input className='icon' icon='search' placeholder='Pesquisar...' />
-        
-        </Menu.Item>
+          <Menu.Item>
+          <Input className='icon' icon='search' placeholder='Pesquisar...' />
+          
+          </Menu.Item>
 
         <Menu.Item>
         <Dropdown item text='Categorias' >
@@ -64,7 +70,7 @@ export default class MenuExampleStackable extends Component {
         </Dropdown>
         </Menu.Item>
 
-        <Menu.Menu position='right'>
+        
         <Menu.Item icon='user circle'
           name='Entrar'
           active={activeItem === 'login'}
