@@ -2,6 +2,8 @@ import React from 'react';
 import { Segment,Icon } from 'semantic-ui-react';
 import './App.css';
 import MenuSistema from './MenuSistema';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import Rotas from './Rotas';
 
 
@@ -11,7 +13,7 @@ function App() {
 
 
     <MenuSistema/>
-    
+    <ToastContainer />
     <Rotas />
 
     <div style={{marginTop: '6%'}} class="ui inverted vertical footer segment">

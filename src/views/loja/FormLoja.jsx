@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon, Segment,Modal,Header} from 'semantic-ui-react';
+import {mensagemErro, notifyError, notifySuccess } from '../../views/util/Util';
 import { ENDERECO_API } from '../../views/util/Constantes';
 
 export default function FormLoja () {
@@ -57,14 +58,32 @@ export default function FormLoja () {
 		if (idLoja != null) { //Alteração:
 
 			axios.put(ENDERECO_API + "api/loja/" + idLoja, lojaRequest)
-			.then((response) => { console.log('Produto alterado com sucesso.') })
-			.catch((error) => { console.log('Erro ao alterar um loja.') })
+			.then((response) => {
+				notifySuccess('Loja alterado com sucesso.')
+				})
+				.catch((error) => {
+				if (error.response) {
+				notifyError(error.response.data.errors[0].defaultMessage)
+				} else {
+				notifyError(mensagemErro)
+				} 
+				})
+				
 
 		} else { //Cadastro:
 			
 			axios.post(ENDERECO_API + "api/loja", lojaRequest)
-			.then((response) => { console.log('Loja cadastrada com sucesso.') })
-			.catch((error) => { console.log('Erro ao incluir o loja.') })
+			.then((response) => {
+				notifySuccess('Loja cadastrado com sucesso.')
+				})
+				.catch((error) => {
+				if (error.response) {
+				notifyError(error.response.data.errors[0].defaultMessage)
+				} else {
+				notifyError(mensagemErro)
+				} 
+				})
+				
 		}
 	}
 

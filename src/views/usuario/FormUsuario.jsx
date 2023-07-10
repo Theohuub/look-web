@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
 import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon, Segment,Header,Modal } from 'semantic-ui-react';
+import {mensagemErro, notifyError, notifySuccess } from '../../views/util/Util';
 import { ENDERECO_API } from '../../views/util/Constantes';
 
 export default function FormUsuario () {
@@ -53,14 +54,32 @@ export default function FormUsuario () {
 		if (idUsuario != null) { //Alteração:
 
 			axios.put(ENDERECO_API + "api/usuario/" + idUsuario, usuarioRequest)
-			.then((response) => { console.log('Usuario alterado com sucesso.') })
-			.catch((error) => { console.log('Erro ao alter um usuário.') })
+			.then((response) => {
+				notifySuccess('Usuario alterado com sucesso.')
+				})
+				.catch((error) => {
+				if (error.response) {
+				notifyError(error.response.data.errors[0].defaultMessage)
+				} else {
+				notifyError(mensagemErro)
+				} 
+				})
+				
 
 		} else { //Cadastro:
 			
 			axios.post(ENDERECO_API + "api/usuario", usuarioRequest)
-			.then((response) => { console.log('Usuário cadastrado com sucesso.') })
-			.catch((error) => { console.log('Erro ao incluir o usuário.') })
+			.then((response) => {
+				notifySuccess('Usuario cadastrado com sucesso.')
+				})
+				.catch((error) => {
+				if (error.response) {
+				notifyError(error.response.data.errors[0].defaultMessage)
+				} else {
+				notifyError(mensagemErro)
+				} 
+				})
+				
 		}
 	 }
 
