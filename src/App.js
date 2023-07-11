@@ -1,9 +1,8 @@
 import React from 'react';
-import { Segment,Icon } from 'semantic-ui-react';
-import './App.css';
-import MenuSistema from './MenuSistema';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import './App.css';
+import MenuSistema from './MenuSistema';
 import Rotas from './Rotas';
 
 
